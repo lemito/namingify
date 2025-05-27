@@ -16,7 +16,7 @@ const str = "snail_case_string"
 const type_default = pb.Methods_Snail2Camel
 
 var (
-	addr   = flag.String("addr", "localhost:50051", "the address to connect to")
+	addr   = flag.String("addr", "localhost:50051", "address")
 	name   = flag.String("str", str, "String for convert")
 	s_type = flag.Int("type", int(type_default), "Type convert")
 )
