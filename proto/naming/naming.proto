@@ -3,7 +3,7 @@ package naming;
 
 // import "google/api/annotations.proto"; 
 
-option go_package = "github.com/lemito/namingify/protos/namingpb";
+option go_package = "github.com/lemito/namingify/proto/naming";
 
 enum Methods {
     Snail2Camel = 0;
