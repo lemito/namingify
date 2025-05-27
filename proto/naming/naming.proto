@@ -1,0 +1,29 @@
+syntax = "proto3";
+package naming;
+
+// import "google/api/annotations.proto"; 
+
+option go_package = "github.com/lemito/namingify/protos/namingpb";
+
+enum Methods {
+    Snail2Camel = 0;
+    Camel2Snail = 1;
+}
+
+message Request {
+    Methods type = 1;
+    string lex = 2;
+}
+
+message Response {
+    string lex = 1;
+}
+
+service NamingService {
+    rpc Convert(Request) returns (Response) {
+        // option (google.api.http) = {
+        //     post: "/v1alpha1/convert"
+        //     body: "*"
+        // };
+    }
+}
