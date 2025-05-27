@@ -1,2 +1,5 @@
 *.pb.go
 *.sum
+bazel-*
+*.lock
+*.no

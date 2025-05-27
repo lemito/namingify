@@ -1,0 +1,6 @@
+# gazelle:prefix github.com/lemito/namingify
+# gazelle:exclude proto/naming/naming.pb.go proto/naming/naming_grpc.go
+
+load("@gazelle//:def.bzl", "gazelle")
+
+gazelle(name = "gazelle")
