@@ -1,19 +1,13 @@
-load("@rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "naming_client_lib",
     srcs = ["main.go"],
     importpath = "github.com/lemito/namingify/naming_client",
-    visibility = ["//visibility:private"],
+    visibility = ["//visibility:public"],
     deps = [
         "//proto/naming",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//credentials/insecure",
     ],
-)
-
-go_binary(
-    name = "naming_client",
-    embed = [":naming_client_lib"],
-    visibility = ["//visibility:public"],
 )

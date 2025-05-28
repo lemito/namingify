@@ -1,4 +1,4 @@
-package main
+package naming_client
 
 import (
 	"context"
@@ -16,18 +16,19 @@ const str = "snail_case_string"
 const type_default = pb.Methods_Snail2Camel
 
 var (
-	addr   = flag.String("addr", "localhost:50051", "address")
-	name   = flag.String("str", str, "String for convert")
-	s_type = flag.Int("type", int(type_default), "Type convert")
+	addr = flag.String("addr", "localhost:50051", "address")
+	// name   = flag.String("str", str, "String for convert")
+	// s_type = flag.Int("type", int(type_default), "Type convert")
 )
 
-func main() {
+func Conver(method int, lex string) (string, error) {
 
 	flag.Parse()
 
 	conn, err := grpc.NewClient(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf(" %v", err)
+		return "", err
 	}
 	defer conn.Close()
 	client := pb.NewNamingServiceClient(conn)
@@ -35,10 +36,11 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	resp, err := client.Convert(ctx, &pb.Request{Type: pb.Methods(*s_type), Lex: *name})
+	resp, err := client.Convert(ctx, &pb.Request{Type: pb.Methods(method), Lex: lex})
 	if err != nil {
 		log.Fatalf(" %v", err)
+		return "", err
 	}
 
-	fmt.Printf("Response is: %v", resp.GetLex())
+	return fmt.Sprintf("Response is: %v", resp.GetLex()), nil
 }
