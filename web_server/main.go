@@ -64,7 +64,7 @@ func main() {
 
 			log.Printf("Received:\nOption: %s\nMessage: %s", option, message)
 
-			msg, err := naming_client.Conver(opt, message)
+			msg, err := naming_client.Convert(opt, message)
 			if err != nil {
 				log.Fatalf("Err %v", err)
 				http.Error(w, "error", http.StatusInternalServerError)

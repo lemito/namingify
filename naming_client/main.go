@@ -21,7 +21,7 @@ var (
 	// s_type = flag.Int("type", int(type_default), "Type convert")
 )
 
-func Conver(method int, lex string) (string, error) {
+func Convert(method int, lex string) (string, error) {
 
 	flag.Parse()
 
