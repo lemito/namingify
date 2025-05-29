@@ -16,3 +16,16 @@ go_binary(
     embed = [":naming_server_lib"],
     visibility = ["//visibility:public"],
 )
+
+cc_binary(
+    name = "naming_cc_server",
+    srcs = ["server.cc"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/naming:naming_cc_grpc_compile",
+        "@abseil-cpp//absl/flags:flag",
+        "@abseil-cpp//absl/flags:parse",
+        "@grpc//:grpc++_reflection",
+        "@abseil-cpp//absl/strings:str_format",
+    ],
+)
