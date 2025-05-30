@@ -1,0 +1,4 @@
+cc_binary(
+    name = "simple_comcurency_cc",
+    srcs = ["main.cc"],
+)
