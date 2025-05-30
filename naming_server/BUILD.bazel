@@ -25,7 +25,7 @@ cc_binary(
         "//proto/naming:naming_cc_grpc_compile",
         "@abseil-cpp//absl/flags:flag",
         "@abseil-cpp//absl/flags:parse",
-        "@grpc//:grpc++_reflection",
         "@abseil-cpp//absl/strings:str_format",
+        "@grpc//:grpc++_reflection",
     ],
 )
