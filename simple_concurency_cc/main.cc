@@ -121,9 +121,9 @@ int main() {
     for (size_t i = 0; i < 10; i++) {
       threads.emplace_back(just_code_with_mutex);
     }
-
-    std::cout << "res with mutex=" << some_cnt << '\n';
   }
+
+  std::cout << "res with mutex=" << some_cnt << '\n';
 
   std::cout << "=======================\n";
 
@@ -154,11 +154,11 @@ int main() {
 
   std::cout << "=======================\n";
 
-//   for (auto num : fib(6)) {
-//     std::cout << num << " ";
-//   }
+  //   for (auto num : fib(6)) {
+  //     std::cout << num << " ";
+  //   }
 
-//   std::cout << "\n=======================\n";
+  //   std::cout << "\n=======================\n";
 
   return 0;
 }
