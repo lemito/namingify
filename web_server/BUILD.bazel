@@ -5,7 +5,10 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/lemito/namingify/web_server",
     visibility = ["//visibility:public"],
-    deps = ["//naming_client:naming_client_lib"],
+    deps = [
+        "//naming_client:naming_client_lib",
+        "@com_github_golang_groupcache//:groupcache",
+    ],
 )
 
 go_binary(

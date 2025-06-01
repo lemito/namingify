@@ -1,11 +1,15 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/golang/groupcache"
 
 	"github.com/lemito/namingify/naming_client"
 )
@@ -34,7 +38,25 @@ var formTemplate = `
 </html>
 `
 
+var fake_db = map[string][]byte{
+	"cat":   []byte("meow"),
+	"dog":   []byte("woof"),
+	"panda": []byte("undefined"),
+}
+
+var Group = groupcache.NewGroup("sounds", 64<<20, groupcache.GetterFunc(func(ctx context.Context, key string, dest groupcache.Sink) error {
+	log.Println("Cache not found. Work with DB started")
+	val, err := fake_db[key]
+	if !err {
+		return errors.New("no such sound")
+
+	}
+	dest.SetBytes(val)
+	return nil
+}))
+
 func main() {
+
 	http.HandleFunc("/convert", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
@@ -70,7 +92,7 @@ func main() {
 				http.Error(w, "error", http.StatusInternalServerError)
 				return
 			}
-			
+
 			_, err = fmt.Fprint(w, msg)
 			if err != nil {
 				log.Fatalf("Err %v", err)
@@ -81,6 +103,18 @@ func main() {
 			http.Error(w, "No such method", http.StatusMethodNotAllowed)
 		}
 
+	})
+
+	http.HandleFunc("/sound", func(w http.ResponseWriter, r *http.Request) {
+		animal := r.URL.Query().Get("animal")
+		var res []byte
+
+		err := Group.Get(context.Background(), animal, groupcache.AllocatingByteSliceSink(&res))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		w.Write(res)
 	})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
