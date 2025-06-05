@@ -1,0 +1,8 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "linked_list",
+    srcs = ["main.go"],
+    importpath = "github.com/lemito/namingify/simple_ds/linked_list",
+    visibility = ["//visibility:public"],
+)
