@@ -1,0 +1,4 @@
+cc_binary(
+    name = "newton_div",
+    srcs = ["main.cc"],
+)
