@@ -1,6 +1,17 @@
 # gazelle:prefix github.com/lemito/namingify
 # gazelle:exclude proto/naming/naming.pb.go proto/naming/naming_grpc.go
 
-load("@gazelle//:def.bzl", "gazelle")
+load("@gazelle//:def.bzl", "gazelle", "gazelle_binary")
 
-gazelle(name = "gazelle")
+gazelle_binary(
+    name = "gazelle_cc",
+    languages = [
+        "@gazelle//language/proto",  # Optional, should be defined before cc
+        "@gazelle_cc//language/cc",
+    ],
+)
+
+gazelle(
+    name = "gazelle",
+    gazelle = ":gazelle_cc",
+)
