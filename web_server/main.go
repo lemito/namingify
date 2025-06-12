@@ -25,8 +25,10 @@ var formTemplate = `
 	<form method="POST" action="/convert">
 		<label for="option">Method:</label>
 		<select name="option" id="option">
-			<option value="0">Snail2Camel</option>
-			<option value="1">Camel2Snail</option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
 		</select>
 		<br><br>
 		<label for="message">Lex:</label>
@@ -74,19 +76,19 @@ func main() {
 				return
 			}
 
-			option := r.FormValue("option")
 			message := r.FormValue("message")
+			opt_string := r.FormValue("option")
 
-			opt, err := strconv.Atoi(option)
+			opt, err := strconv.Atoi(opt_string)
 			if err != nil {
 				log.Fatalf("Err %v", err)
 				http.Error(w, "error", http.StatusInternalServerError)
 				return
 			}
 
-			log.Printf("Received:\nOption: %s\nMessage: %s", option, message)
+			log.Printf("Received:\n Option %d \n Message: %s", opt, message)
 
-			msg, err := naming_client.Convert(opt, message)
+			msg, err := naming_client.Convert(message, opt)
 			if err != nil {
 				log.Fatalf("Err %v", err)
 				http.Error(w, "error", http.StatusInternalServerError)

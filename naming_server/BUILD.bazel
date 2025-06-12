@@ -1,3 +1,4 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
@@ -17,11 +18,21 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
+cc_library(
+    name = "tables",
+    srcs = ["tables.cc"],
+    hdrs = ["tables.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@abseil-cpp//absl/container:flat_hash_map"],
+)
+
 cc_binary(
     name = "naming_cc_server",
     srcs = ["server.cc"],
     visibility = ["//visibility:public"],
     deps = [
+        "@grpc//:grpc++",
+        ":tables",
         "//proto/naming:naming_cc_grpc_compile",
         "@abseil-cpp//absl/flags:flag",
         "@abseil-cpp//absl/flags:parse",

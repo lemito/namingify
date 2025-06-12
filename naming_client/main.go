@@ -13,7 +13,6 @@ import (
 )
 
 const str = "snail_case_string"
-const type_default = pb.Methods_Snail2Camel
 
 var (
 	addr = flag.String("addr", "localhost:50051", "address")
@@ -21,7 +20,7 @@ var (
 	// s_type = flag.Int("type", int(type_default), "Type convert")
 )
 
-func Convert(method int, lex string) (string, error) {
+func Convert(lex string, opt int) (string, error) {
 
 	flag.Parse()
 
@@ -36,7 +35,7 @@ func Convert(method int, lex string) (string, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	resp, err := client.Convert(ctx, &pb.Request{Type: pb.Methods(method), Lex: lex})
+	resp, err := client.Convert(ctx, &pb.Request{Lex: lex, Type: pb.Types(opt)})
 	if err != nil {
 		log.Fatalf(" %v", err)
 		return "", err

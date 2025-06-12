@@ -20,23 +20,9 @@ type server struct {
 }
 
 func (s *server) Convert(_ context.Context, in *pb.Request) (*pb.Response, error) {
-	switch in.Type {
-	case pb.Methods_Camel2Snail:
-		{
-			log.Printf("Got %s\n", in.Lex)
-			return &pb.Response{Lex: fmt.Sprintf("meow UwU this is annswer from c2s and you recieve %s", in.Lex)}, nil
-		}
-	case pb.Methods_Snail2Camel:
-		{
-			log.Printf("Got %s\n", in.Lex)
-			return &pb.Response{Lex: fmt.Sprintf("meow UwU this is annswer from s2c and you recieve %s", in.Lex)}, nil
-		}
-	default:
-		{
-			log.Printf("Got %s\n", in.Lex)
-			return nil, fmt.Errorf("no such case - %v", in.Type)
-		}
-	}
+
+	log.Printf("Got %s\n", in.Lex)
+	return &pb.Response{Lex: fmt.Sprintf("meow UwU this is annswer from s2c and you recieve %s", in.Lex)}, nil
 }
 
 func main() {

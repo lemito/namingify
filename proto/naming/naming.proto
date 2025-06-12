@@ -5,14 +5,16 @@ package naming;
 
 option go_package = "github.com/lemito/namingify/proto/naming";
 
-enum Methods {
-    Snail2Camel = 0;
-    Camel2Snail = 1;
+enum Types {
+    GOST_1687671 = 0;
+    ISO_91995 = 1;
+    US_GOSDEP = 2;
+    RU_ForeignPass = 3;
 }
 
-message Request {
-    Methods type = 1;
-    string lex = 2;
+message Request {    
+    string lex = 1;
+    Types type = 2;
 }
 
 message Response {
@@ -21,9 +23,5 @@ message Response {
 
 service NamingService {
     rpc Convert(Request) returns (Response) {
-        // option (google.api.http) = {
-        //     post: "/v1alpha1/convert"
-        //     body: "*"
-        // };
     }
 }
