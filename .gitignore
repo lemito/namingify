@@ -1,4 +1,4 @@
-*.pb.go
+*.pb.*
 *.sum
 bazel-*
 *.lock
