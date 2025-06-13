@@ -1,6 +1,39 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
 cc_binary(
     name = "simple_comcurency_cc",
     srcs = ["main.cc"],
+)
+
+cc_library(
+    name = "simple_concurency_cc",
+    hdrs = ["shared.h"],
+    visibility = ["//visibility:public"],
+)
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
+)
+
+cc_binary(
+    name = "shm_client",
+    srcs = ["shm_client.c"],
+    deps = [":simple_concurency_cc"],
+)
+
+cc_binary(
+    name = "shm_server",
+    srcs = ["shm_server.c"],
+    deps = [":simple_concurency_cc"],
+)
+
+cc_binary(
+    name = "sock_client",
+    srcs = ["sock_client.cc"],
+)
+
+cc_binary(
+    name = "sock_server",
+    srcs = ["sock_server.cc"],
 )
