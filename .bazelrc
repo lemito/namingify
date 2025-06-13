@@ -1,4 +1,5 @@
-build --action_env=BAZEL_CXXOPTS="-std=c++23:-Werror"
+build --action_env=BAZEL_CXXOPTS="--std=c++23" # :-Werror
+build --copt=-Wno-return-type
 bazel build --host_copt=-Wno-sign-compare //...
 
 build --watchfs

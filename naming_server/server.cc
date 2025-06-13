@@ -33,8 +33,8 @@ class NamingServiceImpl final : public NamingService::Service {
   Status Convert(ServerContext *context, const Request *request,
                  Response *response) {
     std::ostringstream res;
-    std::string_view in(request->lex());
-    char fakeStr[] = {0, 0};
+    const std::string_view in(request->lex());
+    char fakeStr[2] = {0, 0};
 
     switch (request->type()) {
     case Types::GOST_1687671: {

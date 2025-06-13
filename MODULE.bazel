@@ -9,7 +9,7 @@ bazel_dep(name = "gazelle", version = "0.42.0")
 bazel_dep(name = "gazelle_cc", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.0.2")
 bazel_dep(name = "protobuf", version = "31.0", repo_name = "com_google_protobuf")
-bazel_dep(name = "grpc", version = "1.72.0")
+bazel_dep(name = "grpc", version = "1.73.0-pre1")
 bazel_dep(name = "abseil-cpp", version = "20250512.0")
 bazel_dep(name = "rules_proto_grpc", version = "5.1.0")
 bazel_dep(name = "rules_proto_grpc_cpp", version = "5.1.0")
@@ -78,7 +78,7 @@ git_override(
 protoc = use_extension("@toolchains_protoc//protoc:extensions.bzl", "protoc")
 protoc.toolchain(
     google_protobuf = "com_google_protobuf",
-    version = "v29.0",
+    version = "v31.0",
 )
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")

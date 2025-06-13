@@ -1,6 +1,19 @@
 {
     "files.associations": {
         "type_traits": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "__locale": "cpp",
+        "ios": "cpp",
+        "string_view": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "sstream": "cpp",
+        "ostream": "cpp"
     }
 }

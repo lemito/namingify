@@ -31,12 +31,12 @@ cc_binary(
     srcs = ["server.cc"],
     visibility = ["//visibility:public"],
     deps = [
-        "@grpc//:grpc++",
         ":tables",
         "//proto/naming:naming_cc_grpc_compile",
         "@abseil-cpp//absl/flags:flag",
         "@abseil-cpp//absl/flags:parse",
         "@abseil-cpp//absl/strings:str_format",
+        "@grpc//:grpc++",
         "@grpc//:grpc++_reflection",
     ],
 )

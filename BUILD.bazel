@@ -6,7 +6,7 @@ load("@gazelle//:def.bzl", "gazelle", "gazelle_binary")
 gazelle_binary(
     name = "gazelle_cc",
     languages = [
-        "@gazelle//language/proto",  # Optional, should be defined before cc
+        "@gazelle//language/proto",
         "@gazelle_cc//language/cc",
     ],
 )
